@@ -13,6 +13,9 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated")
 endif()
 
+# Shader files
+file(GLOB SHADER_FILES "${CMAKE_SOURCE_DIR}/res/shaders/*")
+
 # Dear ImGui
 set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/dep/imgui)
 include_directories(${IMGUI_DIR} ${IMGUI_DIR}/backends)
@@ -33,6 +36,9 @@ include_directories(${CMAKE_SOURCE_DIR}/dep/inc)
 # Link directories
 link_directories(${CMAKE_SOURCE_DIR}/dep/lib)
 
+# Copy shaders
+file(COPY ${SHADER_FILES} DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res/shaders)
+
 # Add executables
 add_executable(OpenGLBase
         # Dependencies
@@ -40,6 +46,37 @@ add_executable(OpenGLBase
         ${CMAKE_SOURCE_DIR}/src/glad.c
         # Application
         ${CMAKE_SOURCE_DIR}/src/main.cpp
+        src/gui/gui.cpp
+        src/gui/gui.h
+        src/app/appContext.h
+        src/renderContext/renderContext.cpp
+        src/renderContext/renderContext.h
+        src/glew_glfw.h
+        src/scene/scene.cpp
+        src/scene/scene.h
+        src/camera/baseCamera.cpp
+        src/camera/baseCamera.h
+        src/camera/CameraGameLike.cpp
+        src/camera/CameraGameLike.h
+        src/camera/CameraAnchorFree.cpp
+        src/camera/CameraAnchorFree.h
+        src/framebufferManager/FrameBufferManager.cpp
+        src/framebufferManager/FrameBufferManager.h
+        src/inputHandler/InputHandler.cpp
+        src/inputHandler/InputHandler.h
+        src/gridModule/gridModule.cpp
+        src/gridModule/gridModule.h
+        src/shader/shaderProgram.cpp
+        src/VariantUtil.h
+        src/objectsOpenGL/vertex.h
+        src/objectsOpenGL/VBO.h
+        src/objectsOpenGL/VBO.cpp
+        src/objectsOpenGL/VAO.h
+        src/objectsOpenGL/VAO.cpp
+        src/objectsOpenGL/EBO.h
+        src/objectsOpenGL/EBO.cpp
+        src/mesh/mesh.h
+        src/mesh/mesh.cpp
 )
 
 # Link libraries
