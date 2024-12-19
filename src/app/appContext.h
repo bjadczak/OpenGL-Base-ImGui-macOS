@@ -5,7 +5,10 @@
 #ifndef APPCONTEXT_H
 #define APPCONTEXT_H
 
+#include <numbers>
 #include <imgui.h>
+#include <memory>
+#include <stdexcept>
 #include "../camera/baseCamera.h"
 #include "../camera/CameraAnchorFree.h"
 #include "../camera/CameraGameLike.h"
@@ -41,12 +44,12 @@ struct AppContext {
             case CameraType::GAMELIKE:
                 if(camera != nullptr)
                     camera.reset();
-            camera = std::make_unique<CameraGameLike>(1920, 1080, CameraMode::FREE, glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.f), glm::vec3(-M_PI / 4, 0, 0));
+            camera = std::make_unique<CameraGameLike>(1920, 1080, CameraMode::FREE, glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.f), glm::vec3(-std::numbers::pi / 4, 0, 0));
             break;
             case CameraType::FREEANCHOR:
                 if(camera != nullptr)
                     camera.reset();
-            camera = std::make_unique<CameraAnchorFree>(1920, 1080, CameraMode::ANCHOR, glm::vec3(0.0f, 3.0f, 3.0f), glm::vec3(0.f), glm::vec3(-M_PI / 4, 0, 0));
+            camera = std::make_unique<CameraAnchorFree>(1920, 1080, CameraMode::ANCHOR, glm::vec3(0.0f, 3.0f, 3.0f), glm::vec3(0.f), glm::vec3(-std::numbers::pi / 4, 0, 0));
             break;
             default:
                 throw std::invalid_argument("Invalid camera type");

@@ -7,6 +7,7 @@
 #include<glm/gtc/reciprocal.hpp>
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
+#include <numbers>
 
 static glm::mat4 lookAtMatrix(glm::vec3 eye, glm::vec3 center, glm::vec3 up)
 {
@@ -56,7 +57,7 @@ glm::mat4 CameraGameLike::getMirrorViewMatrix () const
 {
     glm::mat4 mirrorModel(1.0f);
 
-    mirrorModel = glm::rotate(mirrorModel, (float)M_PI/6, glm::vec3(0,0,1));
+    mirrorModel = glm::rotate(mirrorModel, (float)std::numbers::pi/6, glm::vec3(0,0,1));
     mirrorModel = glm::translate(mirrorModel, glm::vec3{-1.23f, 1.0f, 0.0f});
     mirrorModel = glm::scale(mirrorModel, glm::vec3(2,2,2));
     return  lookAtMatrix(Position, Position + Orientation, Up) * mirrorModel * glm::scale(glm::mat4(1), glm::vec3(-1, 1, 1)) * glm::inverse(mirrorModel);

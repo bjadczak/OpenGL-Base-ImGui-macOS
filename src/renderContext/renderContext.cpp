@@ -26,7 +26,7 @@ RenderContext::RenderContext(AppContext &appContext) : appContext(appContext){
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+ only
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);            // Required on Mac
 #else
-    // GL 4.0 + GLSL 400
+    // GL 4.1 + GLSL 400
     glsl_version = "#version 400";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -35,7 +35,7 @@ RenderContext::RenderContext(AppContext &appContext) : appContext(appContext){
 #endif
 
     // Create window with graphics context
-    window = glfwCreateWindow(1280, 720, "PhysicsSimulation", nullptr, nullptr);
+    window = glfwCreateWindow(1280, 720, "OpenGL Graphics Engine", nullptr, nullptr);
     if (window == nullptr)
         throw std::runtime_error("Failed to create GLFW window");
     glfwMakeContextCurrent(window);

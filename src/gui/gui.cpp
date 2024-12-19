@@ -136,7 +136,7 @@ void Gui::showScene () const
     // add rendered texture to ImGUI scene window
     uint64_t textureID = appContext.frameBufferManager->get_texture();
     const auto canvas_sz = ImVec2{viewportPanelSize.x, viewportPanelSize.y};
-    ImGui::Image(reinterpret_cast<ImTextureID>(textureID), canvas_sz, ImVec2{0, 1}, ImVec2{1, 0});
+    ImGui::Image(static_cast<ImTextureID>(textureID), canvas_sz, ImVec2{0, 1}, ImVec2{1, 0});
 
     updateCameraPos(canvas_sz);
 
@@ -216,7 +216,11 @@ void Gui::updateCameraPos (const ImVec2 canvas_sz) const
             appContext.camera->processKeyboard(CameraMovement::RIGHT, 0);
         }
 
-        if (io.KeyCtrl)
+#if defined(__APPLE__)
+        if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_LeftSuper)))
+#else
+        if (ImGui::IsKeyDown(ImGui::GetKeyIndex(ImGuiKey_LeftCtrl)))
+#endif
         {
             appContext.camera->processKeyboard(CameraMovement::DOWN, 0);
         }

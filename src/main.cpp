@@ -6,6 +6,19 @@
 #include "scene/scene.h"
 #include "inputHandler/InputHandler.h"
 
+#ifndef __APPLE__
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+__declspec(dllexport) uint32_t NvOptimusEnablement = 1;
+__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 1;
+
+#ifdef __cplusplus
+}
+#endif
+#endif
+
 
 // Main code
 int main(int, char**)
